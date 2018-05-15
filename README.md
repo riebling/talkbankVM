@@ -1,6 +1,16 @@
 # talkbankVM
 
-This VM is much like Eesen Transcriber, except that it includes not only Eesen Tedlium models, but Kaldi Aspire models for transcribing speech. New features specific to Talkbank data include:
+This VM is much like Eesen Transcriber, except that it includes not only Eesen Tedlium models, but Kaldi Aspire models for transcribing speech. 
+
+## Borrowed from [Eesen Transcriber](https://github.com/srvk/eesen-transcriber)
+### [Installation Guide](https://github.com/srvk/eesen-transcriber/blob/master/INSTALL.md)
+Quickstart instructions:  
+clone this git repository with `git clone http://github.com/riebling/talkbankVM`  
+a folder `talkbankVM` will be created. cd into this folder then run `vagrant up`  
+This will take a *really long* time because it builds both Kaldi and Eesen.  
+Data placed in this folder will appear from within the VM as `/vagrant/<data>`  
+
+## New features specific to Talkbank data include:
 
  * speech2wer.sh - Computes word error rate for audio, scoring against plain text files. INPUTS: WAV (or MP3) audio, text transcript. Optional input: a GLM 'global mapping' file that specifies homonyms to be scored equivalently to their sound-alikes. Suppose you have an audio file named set9.wav, a transcript named set9.stm, and a GLM file named Tony-input.glm, saved in a local folder `Tony-input`. To obtain scores:
 
@@ -25,15 +35,10 @@ By default this uses the Aspire model; you can see in the file `speech2wer.sh` t
 segments=show.seg
 models=aspire.kaldi
 ```
-
-## Borrowed from [Eesen Transcriber](https://github.com/srvk/eesen-transcriber)
-### [Installation Guide](https://github.com/srvk/eesen-transcriber/blob/master/INSTALL.md)
-Quickstart instructions:  
-clone this git repository with `git clone http://github.com/riebling/talkbankVM`  
-a folder `talkbankVM` will be created. cd into this folder then run `vagrant up`  
-This will take a *really long* time because it builds both Kaldi and Eesen.  
-Data placed in this folder will appear from within the VM as `/vagrant/<data>`  
-
+ * speech2per.sh - computes phone error rate  
+ * speech2phones.sh - phonetic transcription  
+ * speech2phonectm.sh - phonetic transcription with phone onset timings
+ 
 ### [User Guide](https://github.com/srvk/eesen-transcriber/blob/master/USERGUIDE.md)
 
 ## License
