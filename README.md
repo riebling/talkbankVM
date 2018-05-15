@@ -1,21 +1,38 @@
-# eesen-transcriber
+# talkbankVM
 
-This Virtual Machine implements a system that can transcribe and/ or sub-title pretty much any audio or video file. It will separate speech from non-speech, identify individual speakers, and then convert speech to text. It supports various input and output formats. If you give it a full corpus of files to transcribe, it allows you to browse and search the results.
+This VM is much like Eesen Transcriber, except that it includes not only Eesen Tedlium models, but Kaldi Aspire models for transcribing speech. New features specific to Talkbank data include:
 
-If the results are not good, it is easy to update and change several parts of the system, for example the segmentation parameters (not enough words in the output? too much noise?) or the language model (crappy output)?
+ * speech2wer.sh - Computes word error rate for audio, scoring against plain text files. INPUTS: WAV (or MP3) audio, text transcript. Optional input: a GLM 'global mapping' file that specifies homonyms to be scored equivalently to their sound-alikes. Suppose you have an audio file named set9.wav, a transcript named set9.stm, and a GLM file named Tony-input.glm, saved in a local folder `Tony-input`. To obtain scores:
 
-Internally, the system
-uses [EESEN](https://github.com/yajiemiao/eesen) RNN-based decoding, trained on
-the [TED-LIUM](http://www-lium.univ-lemans.fr/en/content/ted-lium-corpus) dataset and the Cantab-TEDLIUM [language model](http://cantabresearch.com/cantab-TEDLIUM.tar.bz2) from
-Cantab Research. In addition it includes an adapted version of
-Tanel Alumae's [Kaldi Offline Transcriber](https://github.com/alumae/kaldi-offline-transcriber) which accepts most any audio/
-video format and produces transcriptions as subtitles, plain text, and more.
-The transcriber performs [LIUM speaker diarization](http://www-lium.univ-lemans.fr/diarization/doku.php/welcome).
-Lastly, the VM provides a video browser in a web page such that transcriptions appear as video subtitles, and are searchable by keyword across videos.
+```
+vagrant up # takes REALLY long because contains Eesen and Kaldi
+vagrant ssh # log into the virtual machine
+cd bin # the home folder for tools
+./speech2wer.sh /vagrant/Tony-input/set9.wav /vagrant/Tony-input/Tony-input.glm
+```
+Output will appear in build/output/set9.*
 
-This VM runs either locally with Vagrant/VirtualBox or remotely as an Amazon Machine Image on AWS.
+You can optionally run without a GLM file.  
+By default this uses the Aspire model; you can see in the file `speech2wer.sh` this section, `segments` and `models` are selected. To switch to Tedlium+Eesen models, comment out the Aspire + Kaldi ones, and uncomment the Tedlium + Eesen ones.
+```
+# Tedlium + Eesen
+#segments=show.seg
+#models=tedlium.eesen
+# Swbd8K + Eesen
+#segments=show.s.seg
+#models=swbd.8k
+# Aspire + Kald
+segments=show.seg
+models=aspire.kaldi
+```
 
+## Borrowed from [Eesen Transcriber](https://github.com/srvk/eesen-transcriber)
 ### [Installation Guide](https://github.com/srvk/eesen-transcriber/blob/master/INSTALL.md)
+Quickstart instructions:  
+clone this git repository with `git clone http://github.com/riebling/talkbankVM`  
+a folder `talkbankVM` will be created. cd into this folder then run `vagrant up`  
+This will take a *really long* time because it builds both Kaldi and Eesen.  
+Data placed in this folder will appear from within the VM as `/vagrant/<data>`  
 
 ### [User Guide](https://github.com/srvk/eesen-transcriber/blob/master/USERGUIDE.md)
 
