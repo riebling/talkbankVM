@@ -12,15 +12,15 @@ Data placed in this folder will appear from within the VM as `/vagrant/<data>`
 
 ## New features specific to Talkbank data include:
 
- * speech2wer.sh - Computes word error rate for audio, scoring against plain text files. INPUTS: WAV (or MP3) audio, text transcript. Optional input: a GLM 'global mapping' file that specifies homonyms to be scored equivalently to their sound-alikes. Suppose you have an audio file named set9.wav, a transcript named set9.stm, and a GLM file named Tony-input.glm, saved in a local folder `Tony-input`. To obtain scores:
+ * speech2wer.sh - Computes word error rate for audio, scoring against plain text files (Now uses [NIST sctk scoring tool](https://www.nist.gov/itl/iad/mig/tools)) INPUTS: WAV (or MP3) audio, text transcript. Optional input: [a GLM 'global mapping' file](https://github.com/riebling/talkbankVM/blob/master/Tony-input/Tony-input.glm) that specifies homonyms to be scored equivalently to their sound-alikes. Suppose you have an audio file named set9.wav, a transcript named set9.stm, and a GLM file named Tony-input.glm, saved in a local folder `Tony-input`. To obtain scores:
 
 ```
-vagrant up # takes REALLY long because contains Eesen and Kaldi
+vagrant up  # first time takes REALLY long, must provision Eesen and Kaldi and models
 vagrant ssh # log into the virtual machine
-cd bin # the home folder for tools
+cd bin      # the home folder for tools
 ./speech2wer.sh /vagrant/Tony-input/set9.wav /vagrant/Tony-input/Tony-input.glm
 ```
-Output will appear in build/output/set9.* - here is an example:
+Output will appear in build/output/set9.* - for example:
 ```
 build/output/set9.dtl
 DETAILED OVERALL REPORT FOR THE SYSTEM: build/output/set9.filt.hyp
