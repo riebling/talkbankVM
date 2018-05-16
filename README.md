@@ -21,8 +21,8 @@ cd bin      # the home folder for tools
 ./speech2wer.sh /vagrant/Tony-input/set9.wav /vagrant/Tony-input/Tony-input.glm
 ```
 Output will appear in build/output/set9.* - for example:
+`build/output/set9.dtl`  
 ```
-build/output/set9.dtl
 DETAILED OVERALL REPORT FOR THE SYSTEM: build/output/set9.filt.hyp
 
 SENTENCE RECOGNITION PERFORMANCE
@@ -119,8 +119,9 @@ FALSELY RECOGNIZED               Total                 (8)
 
 * NOTE: The 'Falsely Recognized' words are those hypothesis words
         which the recognizer incorrectly substituted for a reference word.
-
-build/output/set9.filt.hyp
+```
+`build/output/set9.filt.hyp`  
+```
 SEND DON'T WORK BANKS STAND LAMP AND FOUND BEND LEARNED DANCE GROUND
 build/output/set9.prf
 NIST_TEXT_ALIGNMENT
@@ -147,8 +148,9 @@ REF:  send DAMP  LACK BANK  STAMP lamp LAND BAND  bend LEND    dance GRAND
 HYP:  send DON'T WORK BANKS STAND lamp AND  FOUND bend LEARNED dance GROUND
 Eval:      S     S    S     S          S    S          S             S     
 
-
-build/output/set9.raw
+```
+`build/output/set9.raw`  
+```
 
 
 
@@ -167,8 +169,9 @@ build/output/set9.raw
         | S.D. |  0.0    0.0 |  0.0    0.0    0.0    0.0    0.0    0.0 |
         |Median|  1.0   12.0 |  4.0    8.0    0.0    0.0    8.0    1.0 |
         `--------------------------------------------------------------'
-build/output/set9.sys
-
+```
+`build/output/set9.sys`  
+```
 
 
                      SYSTEM SUMMARY PERCENTAGES by SPEAKER                     
