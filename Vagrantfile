@@ -158,7 +158,7 @@ Vagrant.configure("2") do |config|
 
     # get aspire path.sh
     cd /home/${user}/eesen-offline-transcriber
-    cp /vagrant/path.aspire.sh .
+    cp /vagrant/scripts/runTonyRun.sh .
 
     # make links to Kaldi experiment
     cd /home/${user}/tools/eesen-offline-transcriber
